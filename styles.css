@@ -25,6 +25,9 @@ button {
 button:hover {
     background-color: #31343f;
 }
+button:active {
+    background-color: #414553;
+}
 #calculator {
     width: 350px;
     height: auto;
@@ -75,6 +78,10 @@ button:hover {
 #clear-delete button:hover {
     background-color: #31343f;
 }
+#clear-delete button:active {
+    background-color: #414553;
+}
+
 /* ---- Buttons: numbers and operators ---- */
 
 #buttons div {
