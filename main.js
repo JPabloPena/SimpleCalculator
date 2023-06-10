@@ -24,23 +24,31 @@ const buttonSum = $('.sum').addEventListener('click', () => {calculate('+')})
 const buttonEqual = $('.equal').addEventListener('click', () => {calculate('=')})
 
 let aux = ''
+let firstNumberAux = 0
+let operatorAux = ''
+let finalResult = 0
 function calculate(num) {
-    let finalResult
+    console.log('Num: '+num)
     if (num === '/' || num === '*' || num === '-' || num === '+') {
-        
+        operatorAux = num
+        firstNumberAux = parseFloat(aux)
+        aux = ''
+        // result.innerText = ''
+        console.log({operatorAux, firstNumberAux, aux})
+    } else if (num === '=') {
+        switch (operatorAux) {
+            case '+':
+                console.log('Estoy sumando')
+                finalResult += firstNumberAux + parseFloat(aux)
+                aux = '0'
+                result.innerText = finalResult
+                break
+        }
+    } else {
+        if (aux.length === 0) {
+            result.innerText = ''
+        }
+        aux += num
+        result.innerText += num
     }
-    switch (num) {
-        case '/':
-
-        case '*':
-
-        case '-':
-            parseFloat(aux)
-        case '+':
-
-        default:
-            aux += num
-
-    }
-    result.innerText += num
 }
