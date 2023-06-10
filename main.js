@@ -3,8 +3,8 @@ const $ = (selector) => document.querySelector(selector)
 const result = $('#result')
 const resultPreview = $('#result-preview')
 /* Clear and Delete */
-const buttonClear = $('.button-clear')
-const buttonDelete = $('.button-delete')
+const buttonClear = $('#button-clear').addEventListener('click', clear)
+const buttonDelete = $('#button-delete')
 /* ---- Numbers ----*/
 const buttonDot = $('.num-dot').addEventListener('click', () => {newNumber('.')})
 const button0 = $('.num-0').addEventListener('click', () => {newNumber('0')})
@@ -165,73 +165,10 @@ function eval(num1, num2, op) {
     } 
 }
 
-
-function calculate() {}
-
-
-
-
-
-
-
-
-
-
-
-
-// let aux = ''
-// let firstNumberAux = 0
-// let operatorAux = ''
-// let finalResult = 0
-// let isNextANumber = false
-// let wasAEqualBefore = false
-// let minusCounterAux = 0
-
-// function calculate(num) {
-//     const operatorsConditional = num === '/' || num === 'x' || num === '-' || num === '+' || num === '='
-//     if (operatorsConditional && isNextANumber === false) {
-//         if (wasAEqualBefore === true) resultPreview.innerText = finalResult
-//         if (num !== '=') operatorAux = num // -
-//         console.log({finalResult})
-//         resultPreview.innerText += aux + num
-//         switch (operatorAux) {
-//             case '-':
-//                 console.log('Estoy restando')
-//                 if (minusCounterAux === 0) {
-//                     aux === '' ? finalResult += 0 : finalResult += parseFloat(aux) // 10
-//                     minusCounterAux++ // 1
-//                     break
-//                 }
-//                 aux === '' ? finalResult += 0 : finalResult += -parseFloat(aux)
-//                 console.log('Resta ' + finalResult)
-//                 result.innerText = finalResult // 10
-//                 break
-//             case '+':
-//                 console.log('Estoy sumando')
-//                 aux === '' ? finalResult += 0 : finalResult += parseFloat(aux) // 10 + 0 = 10
-//                 console.log('Suma ' + finalResult)
-//                 result.innerText = finalResult // 10
-//                 minusCounterAux = 0
-//                 break
-//         }
-//         aux = ''
-//         isNextANumber = true
-//         wasAEqualBefore = false
-//         if (num === '=') {
-//             isNextANumber = false
-//             wasAEqualBefore = true
-//         }
-//     } else if (!operatorsConditional) {
-//         if (aux.length === 0) {
-//             result.innerText = ''
-//         }
-//         if (wasAEqualBefore === true) {
-//             finalResult = 0
-//             wasAEqualBefore = false
-//             resultPreview.innerText = ''
-//         }
-//         aux += num // 10
-//         result.innerText += num // 10
-//         isNextANumber = false
-//     }
-// }
+function clear() {
+    auxNum = ''
+    arrNumbers = []
+    resultadoFinal = 0
+    isEqualActivated = false
+    result.innerText = resultadoFinal
+}
