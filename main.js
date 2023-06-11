@@ -45,7 +45,13 @@ function operation(operator, number) {
         arrNumbers[arrNumbers.length - 1] = operator
         const newPreviewMessage = resultPreview.innerText.slice(0, -2)
         if (newPreviewMessage[0] !== '(' || newPreviewMessage[newPreviewMessage.length -1 ] !== ')') {
-            resultPreview.innerText = `(${newPreviewMessage})`
+            console.log({newPreviewMessage})
+            console.log('True? ', /[+\-*\/]/.test(newPreviewMessage))
+            if (/[+\-*\/]/.test(newPreviewMessage)) {
+                resultPreview.innerText = `(${newPreviewMessage})`
+            } else {
+                resultPreview.innerText = `${newPreviewMessage}`
+            }
         } else {
             resultPreview.innerText = `${newPreviewMessage}`
         }
