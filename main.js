@@ -36,11 +36,25 @@ function newNumber(num) {
 let arrNumbers = []
 let resultadoFinal = 0
 let isEqualActivated = false
+let isNewChange = false
 function operation(operator, number) {
+    console.log({operator, number})
+
+    // Change the operation to another
+    if (operator !== '' && number === '' && isEqualActivated === false && isNewChange === false) {
+        arrNumbers[arrNumbers.length - 1] = operator
+        const newPreviewMessage = resultPreview.innerText.slice(0, -2)
+        if (newPreviewMessage[0] !== '(' || newPreviewMessage[newPreviewMessage.length -1 ] !== ')') {
+            resultPreview.innerText = `(${newPreviewMessage})`
+        } else {
+            resultPreview.innerText = `${newPreviewMessage}`
+        }
+    }
+
     if (isEqualActivated === false) resultPreview.innerText += ` ${number} ${operator} `
 
+    // Continue operating with the result
     if (operator !== '=' && isEqualActivated === true) {
-        console.log('Hellooo')
         isEqualActivated = false
         resultPreview.innerText = ` ${arrNumbers[0]} ${operator} `
     }
