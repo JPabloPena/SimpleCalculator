@@ -37,21 +37,29 @@ let arrNumbers = []
 let resultadoFinal = 0
 let isEqualActivated = false
 function operation(operator, number) {
-    if (operator !== '=' && isEqualActivated === true) isEqualActivated = false
+    if (isEqualActivated === false) resultPreview.innerText += ` ${number} ${operator} `
+
+    if (operator !== '=' && isEqualActivated === true) {
+        console.log('Hellooo')
+        isEqualActivated = false
+        resultPreview.innerText = ` ${arrNumbers[0]} ${operator} `
+    }
 
     if (number !== '') {
         arrNumbers.push(parseFloat(number))
     }
 
-    if (arrNumbers.length === 2 && arrNumbers[1] === '=') {
+    if (typeof(arrNumbers[0]) === 'number' && arrNumbers[1] === '=') {
         const firstNumber = arrNumbers.shift()
         arrNumbers.shift()
         arrNumbers.unshift(firstNumber)
         console.log(`I'm the new array ${arrNumbers}`)
     }
 
+    // When you made an operation, but you want continue operating with the result
     if (typeof(arrNumbers[1]) === 'number') {
         arrNumbers.shift()
+        resultPreview.innerText = `${number} ${operator}`
         console.log(`I'm the second new array ${arrNumbers}`)
     }
 
@@ -66,7 +74,6 @@ function operation(operator, number) {
     if (arrNumbers.length === 4) {
         console.log('Tengo 4')
         const auxOperator = arrNumbers[arrNumbers.length - 1]
-        // const auxOperator = arrNumbers[1]
         console.log({auxOperator})
         switch (auxOperator) {
             case '+':
@@ -133,7 +140,8 @@ function operation(operator, number) {
                 auxMul = arrNumbers[2] * arrNumbers[4]
                 resultadoFinal = eval(arrNumbers[0], auxMul, arrNumbers[1])
                 result.innerText = resultadoFinal
-                arrNumbers = [resultadoFinal, arrNumbers[1]]
+                // arrNumbers = [resultadoFinal, arrNumbers[1]]
+                arrNumbers = [resultadoFinal]
                 console.log({arrNumbers})
                 break
             case '/':
@@ -142,7 +150,8 @@ function operation(operator, number) {
                 auxDiv = arrNumbers[2] / arrNumbers[4]
                 resultadoFinal = eval(arrNumbers[0], auxDiv, arrNumbers[1])
                 result.innerText = resultadoFinal
-                arrNumbers = [resultadoFinal, arrNumbers[1]]
+                // arrNumbers = [resultadoFinal, arrNumbers[1]]
+                arrNumbers = [resultadoFinal]
                 console.log({arrNumbers})
                 break
         }
@@ -171,4 +180,5 @@ function clear() {
     resultadoFinal = 0
     isEqualActivated = false
     result.innerText = resultadoFinal
+    resultPreview.innerText = ''
 }
