@@ -36,12 +36,15 @@ function newNumber(num) {
 let arrNumbers = []
 let resultadoFinal = 0
 let isEqualActivated = false
-let isNewChange = false
+let isFirstOperation = true
 function operation(operator, number) {
     console.log({operator, number})
 
+    // Is it's the first operation add 0 to avoid show " /" or " +", etc.
+    if (number === '' && arrNumbers.length === 0) number = '0'
+
     // Change the operation to another
-    if (operator !== '' && number === '' && isEqualActivated === false && isNewChange === false) {
+    if (operator !== '' && number === '' && isEqualActivated === false) {
         arrNumbers[arrNumbers.length - 1] = operator
         const newPreviewMessage = resultPreview.innerText.slice(0, -2)
         if (newPreviewMessage[0] !== '(' || newPreviewMessage[newPreviewMessage.length -1 ] !== ')') {
@@ -177,6 +180,7 @@ function operation(operator, number) {
         }
     }
     console.log(arrNumbers.length)
+    isFirstOperation = false
 }
 
 function eval(num1, num2, op) {
