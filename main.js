@@ -178,6 +178,10 @@ function clear() {
 }
 
 function deleteNumber() {
+    // Clean all if result = Nan | Undefined | Infinity
+    if (/[a-z]/.test(result.innerText.toLowerCase())) {
+        clear()
+    }
     auxNum = auxNum.slice(0, -1)
     let resultText = result.innerText
     result.innerText = resultText.slice(0, -1)
