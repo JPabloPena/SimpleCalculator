@@ -4,7 +4,7 @@ const result = $('#result')
 const resultPreview = $('#result-preview')
 /* Clear and Delete */
 const buttonClear = $('#button-clear').addEventListener('click', clear)
-const buttonDelete = $('#button-delete')
+const buttonDelete = $('#button-delete').addEventListener('click', deleteNumber)
 /* ---- Numbers ----*/
 const buttonDot = $('.num-dot').addEventListener('click', () => {newNumber('.')})
 const button0 = $('.num-0').addEventListener('click', () => {newNumber('0')})
@@ -34,7 +34,7 @@ function newNumber(num) {
 }
 
 let arrNumbers = []
-let resultadoFinal = 0
+let finalResult = 0
 let isEqualActivated = false
 let isFirstOperation = true
 function operation(operator, number) {
@@ -101,25 +101,25 @@ function operation(operator, number) {
         switch (auxOperator) {
             case '+':
                 console.log(`I'm sum`)
-                resultadoFinal = eval(arrNumbers[0], arrNumbers[2], arrNumbers[1])
-                result.innerText = resultadoFinal
-                arrNumbers = [resultadoFinal, '+']
+                finalResult = eval(arrNumbers[0], arrNumbers[2], arrNumbers[1])
+                result.innerText = finalResult
+                arrNumbers = [finalResult, '+']
                 console.log({arrNumbers})
                 break
             case '-':
                 console.log(`I'm sub`)
-                resultadoFinal = eval(arrNumbers[0], arrNumbers[2], arrNumbers[1])
-                result.innerText = resultadoFinal
-                arrNumbers = [resultadoFinal, '-']
+                finalResult = eval(arrNumbers[0], arrNumbers[2], arrNumbers[1])
+                result.innerText = finalResult
+                arrNumbers = [finalResult, '-']
                 console.log({arrNumbers})
                 break
             case 'x':
                 if (arrNumbers[1] !== '+' && arrNumbers[1] !== '-') {
                     console.log(arrNumbers[1])
                     console.log(`I'm mul`)
-                    resultadoFinal = eval(arrNumbers[0], arrNumbers[2], arrNumbers[1])
-                    result.innerText = resultadoFinal
-                    arrNumbers = [resultadoFinal, 'x']
+                    finalResult = eval(arrNumbers[0], arrNumbers[2], arrNumbers[1])
+                    result.innerText = finalResult
+                    arrNumbers = [finalResult, 'x']
                     console.log({arrNumbers})
                     break
                 }
@@ -128,9 +128,9 @@ function operation(operator, number) {
                 if (arrNumbers[1] !== '+' && arrNumbers[1] !== '-') {
                     console.log(arrNumbers[1])
                     console.log(`I'm div`)
-                    resultadoFinal = eval(arrNumbers[0], arrNumbers[2], arrNumbers[1])
-                    result.innerText = resultadoFinal
-                    arrNumbers = [resultadoFinal, '/']
+                    finalResult = eval(arrNumbers[0], arrNumbers[2], arrNumbers[1])
+                    result.innerText = finalResult
+                    arrNumbers = [finalResult, '/']
                     console.log({arrNumbers})
                     break
                 }
@@ -142,10 +142,10 @@ function operation(operator, number) {
                         arrNumbers = [arrNumbers[0]]
                         break
                     } else {
-                        resultadoFinal = eval(arrNumbers[0], arrNumbers[2], arrNumbers[1])
-                        arrNumbers = [resultadoFinal]
+                        finalResult = eval(arrNumbers[0], arrNumbers[2], arrNumbers[1])
+                        arrNumbers = [finalResult]
                     }
-                    result.innerText = resultadoFinal
+                    result.innerText = finalResult
                     console.log({arrNumbers})
                     isEqualActivated = true
                     break
@@ -161,20 +161,20 @@ function operation(operator, number) {
                 console.log(`I'm mul`)
                 let auxMul = 0
                 auxMul = arrNumbers[2] * arrNumbers[4]
-                resultadoFinal = eval(arrNumbers[0], auxMul, arrNumbers[1])
-                result.innerText = resultadoFinal
-                // arrNumbers = [resultadoFinal, arrNumbers[1]]
-                arrNumbers = [resultadoFinal]
+                finalResult = eval(arrNumbers[0], auxMul, arrNumbers[1])
+                result.innerText = finalResult
+                // arrNumbers = [finalResult, arrNumbers[1]]
+                arrNumbers = [finalResult]
                 console.log({arrNumbers})
                 break
             case '/':
                 console.log(`I'm div`)
                 let auxDiv = 0
                 auxDiv = arrNumbers[2] / arrNumbers[4]
-                resultadoFinal = eval(arrNumbers[0], auxDiv, arrNumbers[1])
-                result.innerText = resultadoFinal
-                // arrNumbers = [resultadoFinal, arrNumbers[1]]
-                arrNumbers = [resultadoFinal]
+                finalResult = eval(arrNumbers[0], auxDiv, arrNumbers[1])
+                result.innerText = finalResult
+                // arrNumbers = [finalResult, arrNumbers[1]]
+                arrNumbers = [finalResult]
                 console.log({arrNumbers})
                 break
         }
@@ -201,8 +201,15 @@ function eval(num1, num2, op) {
 function clear() {
     auxNum = ''
     arrNumbers = []
-    resultadoFinal = 0
+    finalResult = 0
     isEqualActivated = false
-    result.innerText = resultadoFinal
+    result.innerText = finalResult
     resultPreview.innerText = ''
+}
+
+function deleteNumber() {
+    auxNum = auxNum.slice(0, -1)
+    let resultText = result.innerText
+    result.innerText = resultText.slice(0, -1)
+    if (result.innerText === '') result.innerText = '0'
 }
