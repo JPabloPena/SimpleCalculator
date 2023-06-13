@@ -31,7 +31,15 @@ function newNumber(num) {
     if (auxNum.length === 0) {
         result.innerText = ''
     }
-    if (auxNum.length < 10){
+
+    if (auxNum.length === 0 && num === '.') {
+        auxNum = '0.'
+        result.innerText = '0.'
+    } else if (auxNum.includes('.') && num === '.') {
+        return
+    } else if (auxNum.length === 1 && auxNum === '0' && num === '0') {
+        return
+    } else if (auxNum.length < 10){
         auxNum += num
         result.innerText += num
     }
