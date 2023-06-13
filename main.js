@@ -31,8 +31,10 @@ function newNumber(num) {
     if (auxNum.length === 0) {
         result.innerText = ''
     }
-    auxNum += num
-    result.innerText += num
+    if (auxNum.length < 10){
+        auxNum += num
+        result.innerText += num
+    }
 }
 
 /* ---- App main logic ---- */
@@ -152,16 +154,27 @@ function operation(operator, number) {
 function eval(num1, num2, op) {
     switch (op) {
         case '+':
-            return num1 + num2
+            return limitDecimals(num1 + num2)
         case '-':
-            return num1 - num2
+            return limitDecimals(num1 - num2)
         case 'x':
-            return num1 * num2
+            return limitDecimals(num1 * num2)
         case '/':
-            return num1 / num2
+            return limitDecimals(num1 / num2)
         default:
-            return `You can't divide by 0`
-    } 
+            'Error'
+    }
+}
+
+/* ---- Limit decimals up to 5 ---- */
+function limitDecimals(number) {
+    const decimals = number.toString().split('.')[1]
+    if (decimals) {
+        const numDecimals = Math.min(decimals.length, 5)
+        const truncatedNumber = number.toString().split('.')[0] + '.' + decimals.slice(0, numDecimals)
+        return parseFloat(truncatedNumber)
+    }
+    return number
 }
 
 /* ---- Change operator ---- */
