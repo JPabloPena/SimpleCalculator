@@ -51,7 +51,7 @@ function operation(operator, number) {
         const newPreviewMessage = resultPreview.innerText.slice(0, -2)
         if (newPreviewMessage[0] !== '(' || newPreviewMessage[newPreviewMessage.length -1 ] !== ')') {
             // Avoid adding parenthesis if there's only one number
-            if (/[+\-*\/]/.test(newPreviewMessage)) {
+            if (/[+\-*\/]/.test(newPreviewMessage) && operator !== '=') {
                 resultPreview.innerText = `(${newPreviewMessage})`
             } else {
                 resultPreview.innerText = `${newPreviewMessage}`
