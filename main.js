@@ -42,24 +42,10 @@ let isEqualActivated = false
 function operation(operator, number) {
     auxNum = '' // Resets the number given by the person to create a new one
 
-    // Is it's the first operation add 0 to avoid show " /" or " +", etc.
+    // If it's the first operation add 0 to avoid show " /" or " +", etc.
     if (number === '' && arrNumbers.length === 0) number = '0'
 
-    // Change the operator to another
-    if (operator !== '' && number === '' && isEqualActivated === false) {
-        arrNumbers[arrNumbers.length - 1] = operator
-        const newPreviewMessage = resultPreview.innerText.slice(0, -2)
-        if (newPreviewMessage[0] !== '(' || newPreviewMessage[newPreviewMessage.length -1 ] !== ')') {
-            // Avoid adding parenthesis if there's only one number
-            if (/[+\-*\/]/.test(newPreviewMessage) && operator !== '=') {
-                resultPreview.innerText = `(${newPreviewMessage})`
-            } else {
-                resultPreview.innerText = `${newPreviewMessage}`
-            }
-        } else {
-            resultPreview.innerText = `${newPreviewMessage}`
-        }
-    }
+    changeOperator(operator, number, isEqualActivated)
 
     // Avoid adding unnecesary numbers if the result has already been given
     if (isEqualActivated === false) resultPreview.innerText += ` ${number} ${operator} `
@@ -176,6 +162,24 @@ function eval(num1, num2, op) {
         default:
             return `You can't divide by 0`
     } 
+}
+
+/* ---- Change operator ---- */
+function changeOperator(operator, number, isEqualActivated) {
+    if (operator !== '' && number === '' && isEqualActivated === false) {
+        arrNumbers[arrNumbers.length - 1] = operator
+        const newPreviewMessage = resultPreview.innerText.slice(0, -2)
+        if (newPreviewMessage[0] !== '(' || newPreviewMessage[newPreviewMessage.length -1 ] !== ')') {
+            // Avoid adding parenthesis if there's only one number
+            if (/[+\-*\/]/.test(newPreviewMessage) && operator !== '=') {
+                resultPreview.innerText = `(${newPreviewMessage})`
+            } else {
+                resultPreview.innerText = `${newPreviewMessage}`
+            }
+        } else {
+            resultPreview.innerText = `${newPreviewMessage}`
+        }
+    }
 }
 
 /* ---- Reset the calculator (values and screen) ---- */
