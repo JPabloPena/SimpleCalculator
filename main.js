@@ -1,8 +1,9 @@
 const $ = (selector) => document.querySelector(selector)
 
+/* ---- Result and Result preview ---- */
 const result = $('#result')
 const resultPreview = $('#result-preview')
-/* Clear and Delete */
+/* ---- Clear and Delete ---- */
 const buttonClear = $('#button-clear').addEventListener('click', clear)
 const buttonDelete = $('#button-delete').addEventListener('click', deleteNumber)
 /* ---- Numbers ----*/
@@ -24,6 +25,7 @@ const buttonMinus = $('.minus').addEventListener('click', () => {operation('-', 
 const buttonSum = $('.sum').addEventListener('click', () => {operation('+', auxNum)})
 const buttonEqual = $('.equal').addEventListener('click', () => {operation('=', auxNum)})
 
+/* ---- Start to create a number when you click it ---- */
 let auxNum = ''
 function newNumber(num) {
     if (auxNum.length === 0) {
@@ -33,19 +35,22 @@ function newNumber(num) {
     result.innerText += num
 }
 
-let arrNumbers = []
+/* ---- App main logic ---- */
+let arrNumbers = [] // Numbers and operators are stored here
 let finalResult = 0
 let isEqualActivated = false
-let isFirstOperation = true
 function operation(operator, number) {
+    auxNum = '' // Resets the number given by the person to create a new one
+
     // Is it's the first operation add 0 to avoid show " /" or " +", etc.
     if (number === '' && arrNumbers.length === 0) number = '0'
 
-    // Change the operation to another
+    // Change the operator to another
     if (operator !== '' && number === '' && isEqualActivated === false) {
         arrNumbers[arrNumbers.length - 1] = operator
         const newPreviewMessage = resultPreview.innerText.slice(0, -2)
         if (newPreviewMessage[0] !== '(' || newPreviewMessage[newPreviewMessage.length -1 ] !== ')') {
+            // Avoid adding parenthesis if there's only one number
             if (/[+\-*\/]/.test(newPreviewMessage)) {
                 resultPreview.innerText = `(${newPreviewMessage})`
             } else {
@@ -56,9 +61,10 @@ function operation(operator, number) {
         }
     }
 
+    // Avoid adding unnecesary numbers if the result has already been given
     if (isEqualActivated === false) resultPreview.innerText += ` ${number} ${operator} `
 
-    // Continue operating with the result
+    // Continue operating with the result (i.e., not restart all)
     if (operator !== '=' && isEqualActivated === true) {
         isEqualActivated = false
         resultPreview.innerText = ` ${arrNumbers[0]} ${operator} `
@@ -68,24 +74,27 @@ function operation(operator, number) {
         arrNumbers.push(parseFloat(number))
     }
 
+    // Reorganize the array if the result has been given
     if (typeof(arrNumbers[0]) === 'number' && arrNumbers[1] === '=') {
         const firstNumber = arrNumbers.shift()
         arrNumbers.shift()
         arrNumbers.unshift(firstNumber)
     }
 
-    // When you made an operation, but you want continue operating with the result
+    // ---- When someone made an operation, but you want to continue operating with the result ----
+    // The '=' is removed from the first position, so the result is put first
     if (typeof(arrNumbers[1]) === 'number') {
         arrNumbers.shift()
         resultPreview.innerText = `${number} ${operator}`
     }
 
-    auxNum = ''
-
+    // Add the new operator in the array next to the result
     if (arrNumbers[arrNumbers.length - 1] !== operator && arrNumbers.length !== 0) {
         arrNumbers.push(operator)
     }
+    // ---- ----
 
+    // Know if before a sum or sub NOT come a mul or div. (2+2x5 -> 2+(2x5))
     if (arrNumbers.length === 4) {
         const auxOperator = arrNumbers[arrNumbers.length - 1]
         switch (auxOperator) {
@@ -131,6 +140,7 @@ function operation(operator, number) {
             default:
                 break
         }
+    // Know if before a sum or sub COME a mul or div. (2+2x5 -> 2+(2x5))
     } else if (arrNumbers.length === 6) {
         const auxOperator = arrNumbers[arrNumbers.length - 3]
         switch (auxOperator) {
@@ -150,9 +160,9 @@ function operation(operator, number) {
                 break
         }
     }
-    isFirstOperation = false
 }
 
+/* ---- Make operations ---- */
 function eval(num1, num2, op) {
     switch (op) {
         case '+':
@@ -168,6 +178,7 @@ function eval(num1, num2, op) {
     } 
 }
 
+/* ---- Reset the calculator (values and screen) ---- */
 function clear() {
     auxNum = ''
     arrNumbers = []
@@ -177,8 +188,9 @@ function clear() {
     resultPreview.innerText = ''
 }
 
+/* ---- Delete a number before make an operation if user wants ---- */
 function deleteNumber() {
-    // Clean all if result = Nan | Undefined | Infinity
+    // Clean all if result = NaN | Undefined | Infinity
     if (/[a-z]/.test(result.innerText.toLowerCase())) {
         clear()
     }
