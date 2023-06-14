@@ -26,6 +26,8 @@ const buttonSum = $('.sum').addEventListener('click', () => {operation('+', auxN
 const buttonEqual = $('.equal').addEventListener('click', () => {operation('=', auxNum)})
 /* ---- Copy to clipboard ---- */
 const buttonCopy = document.getElementById('copy').addEventListener('click', copyToClipboard)
+/* Keyboard numbers and operators */
+document.addEventListener('keydown', () => {verifyIfNumberOrOperator(event)})
 
 /* ---- Start to create a number when you click it ---- */
 let auxNum = ''
@@ -47,11 +49,25 @@ function newNumber(num) {
     }
 }
 
+/* ---- Verify if the key pressed is a number or a operator ---- */
+function verifyIfNumberOrOperator(event) {
+    if (/^[0-9.]$/.test(event.key)) {
+        newNumber(event.key)
+    } else if (/[+\-*\/=]/.test(event.key)) {
+        event.key === '*' ?
+            operation('x', auxNum) :
+            operation(event.key, auxNum)
+    } else if (event.key === 'Enter') {
+        operation('=', auxNum)
+    }
+}
+
 /* ---- App main logic ---- */
 let arrNumbers = [] // Numbers and operators are stored here
 let finalResult = 0
 let isEqualActivated = false
 function operation(operator, number) {
+    console.log({operator, number})
     auxNum = '' // Resets the number given by the person to create a new one
 
     // If it's the first operation add 0 to avoid show " /" or " +", etc.
