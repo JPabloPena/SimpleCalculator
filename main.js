@@ -178,8 +178,15 @@ function operation(operator, number) {
         const auxOperator = arrNumbers[arrNumbers.length - 3]
         switch (auxOperator) {
             case 'x':
+                console.log(arrNumbers)
                 let auxMul = 0
                 auxMul = arrNumbers[2] * arrNumbers[4]
+                // First make mul or div before sum or sub
+                if (arrNumbers[5] === 'x' || arrNumbers[5] === '/') {
+                    arrNumbers = [arrNumbers[0], arrNumbers[1], auxMul, operator]
+                    console.log(arrNumbers)
+                    break
+                }
                 finalResult = eval(arrNumbers[0], auxMul, arrNumbers[1])
                 result.innerText = addThousands(finalResult.toString().replace(',', ''))
                 arrNumbers = [finalResult, operator]
@@ -189,6 +196,12 @@ function operation(operator, number) {
                 let auxDiv = 0
                 auxDiv = arrNumbers[2] / arrNumbers[4]
                 finalResult = eval(arrNumbers[0], auxDiv, arrNumbers[1])
+                // First make mul or div before sum or sub
+                if (arrNumbers[5] === 'x' || arrNumbers[5] === '/') {
+                    arrNumbers = [arrNumbers[0], arrNumbers[1], auxDiv, operator]
+                    console.log(arrNumbers)
+                    break
+                }
                 result.innerText = addThousands(finalResult.toString().replace(',', ''))
                 arrNumbers = [finalResult, operator]
                 console.log({arrNumbers})
