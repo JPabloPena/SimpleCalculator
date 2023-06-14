@@ -100,7 +100,7 @@ function operation(operator, number) {
     // Continue operating with the result (i.e., not restart all)
     if (operator !== '=' && isEqualActivated === true) {
         isEqualActivated = false
-        resultPreview.innerText = ` ${arrNumbers[0]} ${operator} `
+        resultPreview.innerText = ` ${addThousands(arrNumbers[0].toString().replace(',', ''))} ${operator} `
     }
 
     if (number !== '') {
