@@ -72,6 +72,8 @@ function verifyIfNumberOrOperator(event) {
             operation(event.key, auxNum)
     } else if (event.key === 'Enter') {
         operation('=', auxNum)
+    } else if (event.key === 'Backspace') {
+        deleteNumber()
     }
 }
 
