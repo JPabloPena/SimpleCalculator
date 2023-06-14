@@ -67,11 +67,15 @@ let arrNumbers = [] // Numbers and operators are stored here
 let finalResult = 0
 let isEqualActivated = false
 function operation(operator, number) {
-    console.log({operator, number})
     auxNum = '' // Resets the number given by the person to create a new one
 
     // If it's the first operation add 0 to avoid show " /" or " +", etc.
     if (number === '' && arrNumbers.length === 0) number = '0'
+
+    if (number === '0.') {
+        number = '0'
+        result.innerText = '0'
+    }
 
     changeOperator(operator, number, isEqualActivated)
 
