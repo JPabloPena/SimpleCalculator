@@ -141,3 +141,48 @@ footer a svg {
     width: 35px;
     height: 35px;
 }
+
+/* ---- Responsive: mobile ---- */
+@media (max-height: 650px) {
+    #calculator {
+        width: 280px;
+    }
+    button {
+        height: auto;
+        font-size: 13px;
+    }
+    #screen {
+        height: 95px;
+    }
+    #result-preview {
+        min-height: 20px;
+        font-size: 13px;
+    }
+    #result {
+        font-size: 27px;
+    }
+    .result #copy {
+        width: 35px;
+        height: 35px;
+    }
+    #buttons div section button {
+        height: 30px;
+    }
+    footer {
+        bottom: 15px;
+    }
+    footer a svg {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-height: 445px) {
+    body {
+        flex-direction: column;
+        gap: 24px;
+    }
+    footer {
+        position: inherit;
+    }
+}
