@@ -24,6 +24,8 @@ const buttonMul = $('.mul').addEventListener('click', () => {operation('x', auxN
 const buttonMinus = $('.minus').addEventListener('click', () => {operation('-', auxNum)})
 const buttonSum = $('.sum').addEventListener('click', () => {operation('+', auxNum)})
 const buttonEqual = $('.equal').addEventListener('click', () => {operation('=', auxNum)})
+/* ---- Copy to clipboard ---- */
+const buttonCopy = document.getElementById('copy').addEventListener('click', copyToClipboard)
 
 /* ---- Start to create a number when you click it ---- */
 let auxNum = ''
@@ -223,4 +225,9 @@ function deleteNumber() {
     let resultText = result.innerText
     result.innerText = resultText.slice(0, -1)
     if (result.innerText === '') result.innerText = '0'
+}
+
+/* ---- Copy to clipboard ---- */
+function copyToClipboard() {
+    navigator.clipboard.writeText(result.innerText)
 }
