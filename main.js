@@ -54,11 +54,15 @@ function newNumber(num) {
 
 /* ---- Add thousands to a num ---- */
 function addThousands(num) {
+    num = num.toString()
     if (num === '') {
         return num
     }
+    if (num.includes('.')) {
+        return num
+    }
     const numberFormatter = Intl.NumberFormat('en-US');
-    return numberFormatter.format(num);
+    return numberFormatter.format(num.replace(',', ''));
 
 }
 
@@ -95,12 +99,12 @@ function operation(operator, number) {
     changeOperator(operator, number, isEqualActivated)
 
     // Avoid adding unnecesary numbers if the result has already been given
-    if (isEqualActivated === false) resultPreview.innerText += ` ${addThousands(number.replace(',', ''))} ${operator} `
+    if (isEqualActivated === false) resultPreview.innerText += ` ${addThousands(number)} ${operator} `
 
     // Continue operating with the result (i.e., not restart all)
     if (operator !== '=' && isEqualActivated === true) {
         isEqualActivated = false
-        resultPreview.innerText = ` ${addThousands(arrNumbers[0].toString().replace(',', ''))} ${operator} `
+        resultPreview.innerText = ` ${addThousands(arrNumbers[0])} ${operator} `
     }
 
     if (number !== '') {
@@ -118,7 +122,7 @@ function operation(operator, number) {
     // The '=' is removed from the first position, so the result is put first
     if (typeof(arrNumbers[1]) === 'number') {
         arrNumbers.shift()
-        resultPreview.innerText = `${addThousands(number.replace(',', ''))} ${operator}`
+        resultPreview.innerText = `${addThousands(number)} ${operator}`
     }
 
     // Add the new operator in the array next to the result
@@ -133,18 +137,18 @@ function operation(operator, number) {
         switch (auxOperator) {
             case '+':
                 finalResult = eval(arrNumbers[0], arrNumbers[2], arrNumbers[1])
-                result.innerText = addThousands(finalResult.toString().replace(',', ''))
+                result.innerText = addThousands(finalResult)
                 arrNumbers = [finalResult, '+']
                 break
             case '-':
                 finalResult = eval(arrNumbers[0], arrNumbers[2], arrNumbers[1])
-                result.innerText = addThousands(finalResult.toString().replace(',', ''))
+                result.innerText = addThousands(finalResult)
                 arrNumbers = [finalResult, '-']
                 break
             case 'x':
                 if (arrNumbers[1] !== '+' && arrNumbers[1] !== '-') {
                     finalResult = eval(arrNumbers[0], arrNumbers[2], arrNumbers[1])
-                    result.innerText = addThousands(finalResult.toString().replace(',', ''))
+                    result.innerText = addThousands(finalResult)
                     arrNumbers = [finalResult, 'x']
                     break
                 }
@@ -152,7 +156,7 @@ function operation(operator, number) {
             case '/':
                 if (arrNumbers[1] !== '+' && arrNumbers[1] !== '-') {
                     finalResult = eval(arrNumbers[0], arrNumbers[2], arrNumbers[1])
-                    result.innerText = addThousands(finalResult.toString().replace(',', ''))
+                    result.innerText = addThousands(finalResult)
                     arrNumbers = [finalResult, '/']
                     break
                 }
@@ -166,7 +170,7 @@ function operation(operator, number) {
                         finalResult = eval(arrNumbers[0], arrNumbers[2], arrNumbers[1])
                         arrNumbers = [finalResult]
                     }
-                    result.innerText = addThousands(finalResult.toString().replace(',', ''))
+                    result.innerText = addThousands(finalResult)
                     isEqualActivated = true
                     break
                 }
@@ -178,7 +182,6 @@ function operation(operator, number) {
         const auxOperator = arrNumbers[arrNumbers.length - 3]
         switch (auxOperator) {
             case 'x':
-                console.log(arrNumbers)
                 let auxMul = 0
                 auxMul = arrNumbers[2] * arrNumbers[4]
                 // First make mul or div before sum or sub
@@ -188,9 +191,8 @@ function operation(operator, number) {
                     break
                 }
                 finalResult = eval(arrNumbers[0], auxMul, arrNumbers[1])
-                result.innerText = addThousands(finalResult.toString().replace(',', ''))
+                result.innerText = addThousands(finalResult)
                 arrNumbers = [finalResult, operator]
-                console.log({arrNumbers})
                 break
             case '/':
                 let auxDiv = 0
@@ -202,9 +204,8 @@ function operation(operator, number) {
                     console.log(arrNumbers)
                     break
                 }
-                result.innerText = addThousands(finalResult.toString().replace(',', ''))
+                result.innerText = addThousands(finalResult)
                 arrNumbers = [finalResult, operator]
-                console.log({arrNumbers})
                 break
         }
     }
@@ -273,7 +274,7 @@ function deleteNumber() {
     }
     auxNum = auxNum.slice(0, -1)
     let resultText = result.innerText
-    result.innerText = resultText.slice(0, -1)
+    result.innerText = addThousands(resultText.slice(0, -1))
     if (result.innerText === '') result.innerText = '0'
 }
 
