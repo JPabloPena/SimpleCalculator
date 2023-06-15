@@ -59,6 +59,9 @@ function addThousands(num) {
         return num
     }
     if (num.includes('.')) {
+        if (num[0] === '0' && num[1] !== '.') {
+            return num.slice(1, num.length)
+        }
         return num
     }
     const numberFormatter = Intl.NumberFormat('en-US');
