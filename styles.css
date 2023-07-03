@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 
+:root {
+    --bg-page: linear-gradient(180deg, rgb(191 113 71) 20%, rgba(242,107,34,1) 100%);
+    --button: transparent;
+    --button-hover: #31343f;
+    --button-active: #414553;
+    --bg-screen: #15171c;
+    --result-preview: #acadaf;
+    --result: #e3fdfd;
+    --bg-buttons: #23252d;
+    --text-top-buttons: #f26b22;
+    --text-numbers: #ffffff;
+    --text-operators: #acadaf;
+}
 * {
     margin: 0;
     box-sizing: border-box;
@@ -9,7 +22,7 @@ html, body {
 }
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(180deg, rgb(191 113 71) 20%, rgba(242,107,34,1) 100%);
+    background: var(--bg-page);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,13 +35,13 @@ button {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    background-color: transparent;
+    background-color: var(--button);
 }
 button:hover {
-    background-color: #31343f;
+    background-color: var(--button-hover);
 }
 button:active {
-    background-color: #414553;
+    background-color: var(--button-active);
 }
 #calculator {
     width: 350px;
@@ -42,7 +55,7 @@ button:active {
 }
 /* ---- Screen ---- */
 #screen {
-    background-color: #15171c;
+    background-color: var(--bg-screen);
     height: 105px;
 }
 #screen div {
@@ -53,7 +66,7 @@ button:active {
     padding: 8px;
 }
 #result-preview {
-    color: #acadaf;
+    color: var(--result-preview);
     text-align: right;
     cursor: default;
     min-height: 25px;
@@ -77,13 +90,13 @@ button:active {
     height: 25px;
 }
 #result {
-    color: #E3FDFD;
+    color: var(--result);
     text-align: right;
     font-size: 40px;
 }
 /* ---- Buttons: all ---- */
 #buttons {
-    background-color: #23252d;
+    background-color: var(--bg-buttons);
     padding: 0 8px 8px 8px;
 }
 /* ---- Buttons: clear and delete ---- */
@@ -94,15 +107,15 @@ button:active {
     gap: 8px;
 }
 #clear-delete button {
-    background-color: transparent;
+    background-color: var(--button);
     width: 100%;
-    color: #f26b22;
+    color: var(--text-top-buttons);
 }
 #clear-delete button:hover {
-    background-color: #31343f;
+    background-color: var(--button-hover);
 }
 #clear-delete button:active {
-    background-color: #414553;
+    background-color: var(--button-active);
 }
 
 /* ---- Buttons: numbers and operators ---- */
@@ -121,10 +134,10 @@ button:active {
 #buttons div section button {
     width: 100%;
     height: 40px;
-    color: #ffffff;
+    color: var(--text-numbers);
 }
 #buttons div section .operator {
-    color: #acadaf;
+    color: var(--text-operators);
 }
 
 /* ---- Footer ---- */
