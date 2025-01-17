@@ -1,5 +1,7 @@
 <!-- PROJECT LOGO -->
-<br />
+<p align="center">
+  <img src="https://github.com/JPabloPena/SimpleCalculator/blob/master/simple-calculator-screenshot.jpeg" width="500" />
+</p>
 <div align="center">
 <h3 align="center">Simple Calculator</h3>
 
