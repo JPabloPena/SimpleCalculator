@@ -43,4 +43,4 @@ Made it for the purpose of practice my logic and development skills.
 ## Contact
 Juan Pablo Peña F. - [LinkedIn](https://www.linkedin.com/in/jpablopena/) - pablo27-99@hotmail.com
 
-Project Link: [https://github.com/JPabloPena/SimpleCalculator](https://github.com/JPabloPena/SimpleCalculator)
+Project link: [https://github.com/JPabloPena/SimpleCalculator](https://github.com/JPabloPena/SimpleCalculator)
